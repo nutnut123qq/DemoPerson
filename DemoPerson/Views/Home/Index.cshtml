@@ -1,0 +1,56 @@
+﻿@model IEnumerable<DemoPerson.Models.Person>
+
+<h2>Person List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Class</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var person in Model)
+        {
+            <tr>
+                <td>@person.Id</td>
+                <td>@person.Name</td>
+                <td>@person.Phone</td>
+                <td>@person.Class</td>
+                <td>
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" name="id" value="@person.Id" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                    <form asp-action="Update" method="post">
+                        <input type="hidden" name="Id" value="@person.Id" />
+                        <input type="text" name="Name" value="@person.Name" />
+                        <input type="text" name="Phone" value="@person.Phone" />
+                        <input type="text" name="Class" value="@person.Class" />
+                        <button type="submit" class="btn btn-warning">Update</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Add New Person</h2>
+<form asp-action="Add" method="post">
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" name="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Phone</label>
+        <input type="text" name="Phone" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Class</label>
+        <input type="text" name="Class" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
